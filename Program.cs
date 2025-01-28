@@ -16,6 +16,11 @@ public class Program
         // Beispiel: var myService = serviceProvider.GetRequiredService<MyService>();
         var building = CompositionRoot.CreateServices(serviceProvider);
 
+        foreach (var apt in building.Appartments)
+        {
+            Console.WriteLine($"Apartment {apt.Number}: floor {apt.Floor}, occupants {apt.NumberOfOccupants}");
+        }
+
         host.Run();
     }
 

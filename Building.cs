@@ -14,8 +14,11 @@ namespace CashierTestConsole
         /// 
         /// </summary>
         public string Name { get; set; } = string.Empty;
+
         public IAddress Address { get; set; } = EmptyAddress.Instance;
-        public IList<IFloor> Floors { get; set; } = new List<IFloor>();
+
         public IOccupant Groundskeeper { get; set; } = AnonymousPersion.Instance;
+
+        public List<IAppartment> Appartments {  get; set; } = new List<IAppartment>();
     }
 }

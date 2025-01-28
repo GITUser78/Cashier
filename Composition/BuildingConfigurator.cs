@@ -10,6 +10,10 @@ namespace CashierTestConsole.Composition
     {
         public string BuildingName { get; set; } = "Default Building";
 
-        public int NumberOfFloors { get; set; }
+        public int LastFloor { get; set; }
+
+        public int AppartmentsPerFloor { get; set; }
+
+        public int StartingFloor { get; set; }
     }
 }

@@ -12,8 +12,11 @@ namespace CashierTestConsole.Composition
         IBuildingBuilder CreateBuilding();
         IBuildingBuilder WithName(string name);
         IBuildingBuilder AtAddress(IAddress address);
-        IBuildingBuilder WithNumberOfFloors(int floors);
+        IBuildingBuilder WithLastFloor(int floors);
         IBuildingBuilder WithAppartmentsPerFloor(int appartmentsPerFloor);
+        
+        IBuildingBuilder WithStartingFloor(int firstFloor);
+
         IBuilding Build();
     }
 }

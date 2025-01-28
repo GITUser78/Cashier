@@ -16,7 +16,7 @@ namespace CashierTestConsole.Dummies
         public static DummyApartment Instance => instance.Value;
 
         public int Number { get; set; }
-        public IFloor Floor { get; set; } = Cellar.Instance;
+        public int Floor { get; set; } = -1;
         public int NumberOfOccupants { get; set; }
 
         public IList<IOccupant> Occupants => new List<IOccupant>();

@@ -10,7 +10,6 @@ namespace CashierTestConsole.Composition
 
         public static IBuilding CreateServices(IServiceProvider serviceProvider)
         {
-            var floorFactory = serviceProvider.GetService<IFloorFactory>();
             var appartmentFactory = serviceProvider.GetService<IAppartmentFactory>();
             var buildingBuilder = serviceProvider.GetRequiredService<IBuildingBuilder>();
             var address = serviceProvider.GetRequiredService<IAddress>();
@@ -25,7 +24,9 @@ namespace CashierTestConsole.Composition
 
 
             return buildingBuilder.CreateBuilding()
-                                      .WithNumberOfFloors(configurator.NumberOfFloors)
+                                      .WithLastFloor(configurator.LastFloor)
+                                      .WithAppartmentsPerFloor(configurator.AppartmentsPerFloor)
+                                      .WithStartingFloor(configurator.StartingFloor)
                                       .WithName(configurator.BuildingName)
                                       .AtAddress(address)
                                       .Build();
@@ -35,8 +36,6 @@ namespace CashierTestConsole.Composition
         {
             services.AddTransient<IOccupant, Occupant>();
             services.AddTransient<IAppartment, Appartment>();
-            services.AddTransient<IFloor, Floor>();
-            services.AddSingleton<IFloorFactory, FloorFactory>();
             services.AddSingleton<IAppartmentFactory, AppartmentFactory>();
             services.AddSingleton<BuildingConfigurator>();
             services.AddSingleton<IBuildingBuilder, BuildingBuilder>();

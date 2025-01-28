@@ -13,17 +13,15 @@ namespace CashierTestConsole.Composition
     {
         private string nameOfBuilding = "";
         private IAddress address;
-        private IList<IFloor> floors = new List<IFloor>();
         private int appartmentsPerFloor = 2;
-        private int numFloors;
-        private IFloorFactory floorFactory;
+        private int lastFloor;
+        private int startFloor;
         private readonly IAppartmentFactory apartmentFactory;
 
         public IServiceProvider Provider { get; }
 
         public BuildingBuilder(IServiceProvider provider)
         {
-            this.floorFactory = provider.GetRequiredService<IFloorFactory>();
             this.apartmentFactory = provider.GetRequiredService<IAppartmentFactory>();
             address = EmptyAddress.Instance;
             Provider = provider;
@@ -36,20 +34,17 @@ namespace CashierTestConsole.Composition
 
         public IBuilding Build()
         {
-            for (int i = 0; i < this.numFloors; i++)
+            var building = this.Provider.GetRequiredService<IBuilding>();
+            for (int i = startFloor; i < this.lastFloor; i++)
             {
-                var floor = this.floorFactory.CreateNextFloor();
                 for (int j = 0; j < this.appartmentsPerFloor; j++)
                 {
-                    floor.Appartments.Add(this.apartmentFactory.CreateNextAppartment(floor));
+                    building.Appartments.Add(this.apartmentFactory.CreateNextAppartment(i));
                 }
-                this.floors.Add(floor);
             }
-
-            var building = this.Provider.GetRequiredService<IBuilding>();
+            
             building.Name = nameOfBuilding;
             building.Address = this.address;
-            building.Floors = this.floors;
             return building;
         }
 
@@ -67,9 +62,15 @@ namespace CashierTestConsole.Composition
             return this;
         }
 
-        public IBuildingBuilder WithNumberOfFloors(int floors)
+        public IBuildingBuilder WithLastFloor(int floors)
         {
-            this.numFloors = floors;            
+            this.lastFloor = floors;            
+            return this;
+        }
+
+        public IBuildingBuilder WithStartingFloor(int firstFloor)
+        {
+            this.startFloor = firstFloor;
             return this;
         }
     }

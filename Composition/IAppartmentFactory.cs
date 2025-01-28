@@ -9,6 +9,6 @@ namespace CashierTestConsole.Composition
 {
     internal interface IAppartmentFactory
     {
-        IAppartment CreateNextAppartment(IFloor floor);
+        IAppartment CreateNextAppartment(int floor);
     }
 }

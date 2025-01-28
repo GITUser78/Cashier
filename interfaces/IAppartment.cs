@@ -10,7 +10,7 @@ namespace CashierTestConsole.interfaces
     {
         int Number { get; set; }
 
-        IFloor Floor { get; set; }
+        int Floor { get; set; }
 
         int NumberOfOccupants { get; set; }
 

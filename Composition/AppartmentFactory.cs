@@ -13,7 +13,7 @@ namespace CashierTestConsole.Composition
             this.provider = serviceProvider;
         }
 
-        public IAppartment CreateNextAppartment(IFloor floor)
+        public IAppartment CreateNextAppartment(int floor)
         {
             var appartment = this.provider.GetRequiredService<IAppartment>();
             appartment.Floor = floor;

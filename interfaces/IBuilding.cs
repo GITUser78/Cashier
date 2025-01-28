@@ -12,7 +12,7 @@ namespace CashierTestConsole.interfaces
 
         IAddress Address { get; set; }
 
-        IList<IFloor> Floors { get; set; }
+        List<IAppartment> Appartments { get; set; }
 
         /// <summary>
         /// caretaker, janitor, apartment manager
